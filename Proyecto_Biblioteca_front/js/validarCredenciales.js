@@ -50,3 +50,39 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("logoutLink").style.display = "none"; // Ocultar enlace de logout
     }
 });
+
+async function validarCredencialess() {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        // Realizar la solicitud POST al endpoint de login
+        const response = await fetch('https://roan82.pythonanywhere.com/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Credenciales inválidas. Por favor, inténtalo de nuevo.');
+        }
+
+        const userData = await response.json();
+
+        // Guardar datos del usuario en el localStorage o manejar la sesión
+        localStorage.setItem('userId', userData.id); // Ejemplo: si la API devuelve un ID de usuario
+
+        // Redirigir a la página de bienvenida u otra página según la respuesta
+        window.location.href = './bienvenido.html';
+    } catch (error) {
+        console.error('Error al autenticar:', error.message);
+        // Mostrar un mensaje de error o realizar alguna acción adecuada
+    }
+}

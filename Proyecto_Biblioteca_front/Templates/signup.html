@@ -22,21 +22,21 @@
 
 <body>
     <div class="header-nav-container">
-    <header>
-        <h1 class="animate__animated animate__fadeInTopLeft">Formulario de Registro</h1>
-    </header>
-    <nav>
-        <a href="../index.html" title="Home">
-            <i class="fa-solid fa-house"></i>
-        </a>
-        <a href="./login.html" title="Entrar">
-            <i class="fa-solid fa-right-to-bracket"></i>
-        </a>
-    </nav>
+        <header>
+            <h1 class="animate__animated animate__fadeInTopLeft">Formulario de Registro</h1>
+        </header>
+        <nav>
+            <a href="../index.html" title="Home">
+                <i class="fa-solid fa-house"></i>
+            </a>
+            <a href="./login.html" title="Entrar">
+                <i class="fa-solid fa-right-to-bracket"></i>
+            </a>
+        </nav>
     </div>
     <section>
         <div class="containerr">
-            <form id="registroForm" action="./login.html" method="get" onsubmit="return validarFormulario()" >
+            <form id="registroForm" onsubmit="event.preventDefault(); validarFormulario();">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required oninput="limpiarAlerta(this)">
@@ -49,7 +49,6 @@
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required oninput="limpiarAlerta(this)">
                 </div>
-                
                 <div class="form-group">
                     <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
                     <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required
@@ -137,10 +136,10 @@
                     <label for="respuesta">Respuesta:</label>
                     <input type="text" id="respuesta" name="respuesta" required oninput="guardarPreguntaYRespuesta(); limpiarAlerta(this)">
                 </div>
-                <button type="button" onclick="if (validarFormulario()) { guardarDatosUsuario(); }">Registrarse</button>
+                <button type="button" onclick="if (validarFormulario()) { guardarDatosUsuario(); guardarDatosUsuarioo(); }">Registrarse</button>
             </form>
         </div>
-    </section><br><br><br><br>
+    </section>
 
     <footer>
         <div class="footer-content">
@@ -153,20 +152,10 @@
         </div>
     </footer>
 
-</body>
-<script src="../js/validaredad.js"></script>
-<script>
-    function enviarFormulario() {
-        var formularioValido = validarFormulario();
-        if (formularioValido) {
-            document.getElementById("registroForm").action = "../templates/login.html";
-            document.getElementById("registroForm").submit();
-        }
-    }
-    function ocultarAlertaPregunta() {
-            document.getElementById("edadAlert").style.display = "none";
-        }
-</script>
+    <script src="../js/validaredad.js"></script>
+    <script src="../js/alertasRegistro.js"></script>
+    <script src="../js/guardarDatosUsuario.js" defer></script>
+    <script src="../js/sessionstorage.js" defer></script>
 </body>
 
 </html>
